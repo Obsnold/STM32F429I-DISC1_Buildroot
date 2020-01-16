@@ -17,7 +17,7 @@ build:
 
 flash:
 	cd $(dir_buildroot)/output/build/host-openocd-0.10.0/tcl && ../../../host/usr/bin/openocd \
-	-f board/stm32f429discovery.cfg \
+	-f board/stm32f429disc1.cfg \
 	-c "init" \
 	-c "reset init" \
 	-c "flash probe 0" \
