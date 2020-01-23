@@ -1,7 +1,9 @@
-Linux on the STM32F429I Discovery board with Buildroot
+Linux on the STM32F429I-DISC1 board with Buildroot
 ======================================================
 
-The project is a set of patches and configuration files to build a bootloader and a Linux based system image with a minimal root file system for the great [STM32F429I Discovery board](http://www.st.com/en/evaluation-tools/32f429idiscovery.html).
+This project is for the STM32F429I-DISC1.
+
+The project is a set of patches and configuration files to build a bootloader and a Linux based system image with a minimal root file system for the great STM32F429I-DISC1 [STM32F429I Discovery board](http://www.st.com/en/evaluation-tools/32f429idiscovery.html).
 
 Build
 -----
@@ -27,10 +29,21 @@ U-Boot is configured to run the kernel in XIP mode directly from the internal fl
 
 ![alt text](doc/stm32f429i-disco_linux.jpg)
 
+ToDo
+---------
+ * Get lcd screen working
+
+
 Changelog
 ---------
+* Current
+  * now configured to build for STM32F429I-DISC1 
+  * Console on USART3 (pins PB10/PB11)
+  * Downgrade binutils to 2.28.1
+  * Add m4 patches (this could probably be removed if upgrading to latest version of buildroot)
+  * Add inittab for busybox
 
-* next
+* 0.2
   * Buildroot 2018.02
   * GCC 6.4.0
   * AFBoot-STM32 0.1
@@ -52,21 +65,23 @@ Boot log
 
 ```
 [    0.000000] Booting Linux on physical CPU 0x0
-[    0.000000] Linux version 4.15.7 (***) (***) #23 PREEMPT Tue Mar 13 20:25:51 CET 2018
+[    0.000000] Linux version 4.15.7 (terry@ubuntu) (gcc version 6.4.0 (Buildroot 2018.02-00010-g386b202-dirty)) #5 PREEMPT Thu Jan 23 08:50:33 GMT 2020
 [    0.000000] CPU: ARMv7-M [410fc241] revision 1 (ARMv7M), cr=00000000
 [    0.000000] CPU: unknown data cache, unknown instruction cache
 [    0.000000] OF: fdt: Machine model: STMicroelectronics STM32F429i-DISCO board
 [    0.000000] Built 1 zonelists, mobility grouping off.  Total pages: 2032
-[    0.000000] Kernel command line: root=/dev/ram
+[    0.000000] Kernel command line: root=/dev/ram irqpoll
+[    0.000000] Misrouted IRQ fixup and polling support enabled
+[    0.000000] This may significantly impact system performance
 [    0.000000] Dentry cache hash table entries: 1024 (order: 0, 4096 bytes)
 [    0.000000] Inode-cache hash table entries: 1024 (order: 0, 4096 bytes)
-[    0.000000] Memory: 7784K/8192K available (1201K kernel code, 127K rwdata, 404K rodata, 63K init, 114K bss, 408K reserved, 0K cma-reserved)
+[    0.000000] Memory: 7784K/8192K available (1193K kernel code, 127K rwdata, 404K rodata, 63K init, 114K bss, 408K reserved, 0K cma-reserved)
 [    0.000000] Virtual kernel memory layout:
 [    0.000000]     vector  : 0x00000000 - 0x00001000   (   4 kB)
 [    0.000000]     fixmap  : 0xffc00000 - 0xfff00000   (3072 kB)
 [    0.000000]     vmalloc : 0x00000000 - 0xffffffff   (4095 MB)
 [    0.000000]     lowmem  : 0x90000000 - 0x90800000   (   8 MB)
-[    0.000000]       .text : 0x(ptrval) - 0x(ptrval)   (1606 kB)
+[    0.000000]       .text : 0x(ptrval) - 0x(ptrval)   (1598 kB)
 [    0.000000]       .init : 0x(ptrval) - 0x(ptrval)   (  12 kB)
 [    0.000000]       .data : 0x(ptrval) - 0x(ptrval)   ( 128 kB)
 [    0.000000]        .bss : 0x(ptrval) - 0x(ptrval)   ( 115 kB)
@@ -90,38 +105,39 @@ Boot log
 [    0.200000] stm32f429-pinctrl soc:pin-controller: GPIOA bank added
 [    0.200000] stm32f429-pinctrl soc:pin-controller: GPIOB bank added
 [    0.200000] stm32f429-pinctrl soc:pin-controller: GPIOC bank added
-[    0.200000] stm32f429-pinctrl soc:pin-controller: GPIOD bank added
+[    0.210000] stm32f429-pinctrl soc:pin-controller: GPIOD bank added
 [    0.210000] stm32f429-pinctrl soc:pin-controller: GPIOE bank added
 [    0.210000] stm32f429-pinctrl soc:pin-controller: GPIOF bank added
 [    0.210000] stm32f429-pinctrl soc:pin-controller: GPIOG bank added
 [    0.210000] stm32f429-pinctrl soc:pin-controller: GPIOH bank added
-[    0.210000] stm32f429-pinctrl soc:pin-controller: GPIOI bank added
-[    0.210000] stm32f429-pinctrl soc:pin-controller: GPIOJ bank added
+[    0.220000] stm32f429-pinctrl soc:pin-controller: GPIOI bank added
+[    0.220000] stm32f429-pinctrl soc:pin-controller: GPIOJ bank added
 [    0.220000] stm32f429-pinctrl soc:pin-controller: GPIOK bank added
 [    0.220000] stm32f429-pinctrl soc:pin-controller: Pinctrl STM32 initialized
-[    0.250000] stm32-dma 40026000.dma-controller: STM32 DMA driver registered
+[    0.260000] stm32-dma 40026000.dma-controller: STM32 DMA driver registered
 [    0.260000] stm32-dma 40026400.dma-controller: STM32 DMA driver registered
 [    0.270000] clocksource: Switched to clocksource arm_system_timer
-[    0.710000] workingset: timestamp_bits=30 max_order=11 bucket_order=0
-[    0.740000] random: fast init done
-[    0.790000] io scheduler noop registered (default)
-[    0.790000] io scheduler mq-deadline registered
-[    0.790000] io scheduler kyber registered
-[    0.790000] STM32 USART driver initialized
-[    0.800000] 40011000.serial: ttyS0 at MMIO 0x40011000 (irq = 32, base_baud = 5625000) is a stm32-usart
-[    1.160000] console [ttyS0] enabled
-[    1.160000] stm32_rtc 40002800.rtc: rtc core: registered 40002800.rtc as rtc0
-[    1.180000] stm32_rtc 40002800.rtc: Date/Time must be initialized
-[    1.180000] i2c /dev entries driver
-[    1.200000] input: gpio_keys as /devices/platform/gpio_keys/input/input0
-[    1.210000] stm32_rtc 40002800.rtc: setting system clock to 2000-01-01 02:11:28 UTC (946692688)
-[    1.220000] Freeing unused kernel memory: 12K
-[    1.220000] This architecture does not have kernel memory protection.
+[    0.680000] workingset: timestamp_bits=30 max_order=11 bucket_order=0
+[    0.710000] random: fast init done
+[    0.760000] io scheduler noop registered (default)
+[    0.760000] io scheduler mq-deadline registered
+[    0.760000] io scheduler kyber registered
+[    0.770000] STM32 USART driver initialized
+[    0.770000] 40004800.serial: ttyS0 at MMIO 0x40004800 (irq = 32, base_baud = 2812500) is a stm32-usart
+[    1.140000] console [ttyS0] enabled
+[    1.150000] stm32_rtc 40002800.rtc: rtc core: registered 40002800.rtc as rtc0
+[    1.160000] stm32_rtc 40002800.rtc: Date/Time must be initialized
+[    1.170000] i2c /dev entries driver
+[    1.180000] input: gpio_keys as /devices/platform/gpio_keys/input/input0
+[    1.190000] stm32_rtc 40002800.rtc: setting system clock to 2000-01-01 00:23:46 UTC (946686226)
+[    1.210000] Freeing unused kernel memory: 12K
+[    1.210000] This architecture does not have kernel memory protection.
+can't run '/etc/init.d/rcS': No such file or directory
 
 
-BusyBox v1.27.2 (2018-03-13 19:50:58 CET) hush - the humble shell
+BusyBox v1.27.2 (2020-01-23 08:15:36 GMT) hush - the humble shell
 Enter 'help' for a list of built-in commands.
 
-/ #
+/ # 
 ```
 
