@@ -1,18 +1,9 @@
-url_buildroot = https://buildroot.org/downloads/buildroot-2018.02.tar.gz
-archive_buildroot = buildroot.tar.gz
 system_image = stm32f769i-disco_system.uImage
-dir_download = downloads
 dir_configs = configs
 dir_buildroot = buildroot
 
-bootstrap:
-	mkdir -p $(dir_download)
-	mkdir -p $(dir_buildroot)
-	wget -O $(dir_download)/$(archive_buildroot) $(url_buildroot)
-	tar zxvf $(dir_download)/$(archive_buildroot) -C $(dir_buildroot) --strip-components=1
-	cp $(dir_configs)/buildroot $(dir_buildroot)/.config
-
 build:
+	cp $(dir_configs)/buildroot $(dir_buildroot)/.config
 	make -j$(nproc) -C $(dir_buildroot)
 
 flash:
@@ -28,4 +19,4 @@ flash:
 	-c "reset run" -c shutdown
 
 clean:
-	rm -rf $(dir_buildroot) $(dir_download)
+	make clean -C $(dir_buildroot)

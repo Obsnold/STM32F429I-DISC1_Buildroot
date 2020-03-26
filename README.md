@@ -10,7 +10,8 @@ Build
 
 Let's download, extract and patch Buildroot:
 
-`$ make bootstrap`
+`$ git submodule init`
+`$ git submodule update`
 
 
 Then build:
