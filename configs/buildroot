@@ -1,8 +1,17 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2018.02-00010-g386b202-dirty Configuration
+# Buildroot 2018.02.12 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
+BR2_HOST_GCC_AT_LEAST_4_5=y
+BR2_HOST_GCC_AT_LEAST_4_6=y
+BR2_HOST_GCC_AT_LEAST_4_7=y
+BR2_HOST_GCC_AT_LEAST_4_8=y
+BR2_HOST_GCC_AT_LEAST_4_9=y
+BR2_HOST_GCC_AT_LEAST_5=y
+BR2_HOST_GCC_AT_LEAST_6=y
+BR2_HOST_GCC_AT_LEAST_7=y
+BR2_HOST_GCC_AT_LEAST_8=y
 
 #
 # Target options
@@ -105,8 +114,6 @@ BR2_cortex_m4=y
 # BR2_cortex_a73_a35 is not set
 # BR2_cortex_a73_a53 is not set
 # BR2_exynos_m1 is not set
-# BR2_falkor is not set
-# BR2_qdf24xx is not set
 # BR2_xgene1 is not set
 BR2_ARM_EABI=y
 BR2_ARM_SOFT_FLOAT=y
@@ -271,6 +278,7 @@ BR2_UCLIBC_TARGET_ARCH="arm"
 #
 # Binutils Options
 #
+BR2_PACKAGE_HOST_BINUTILS_SUPPORTS_CFI=y
 BR2_BINUTILS_VERSION_2_28_X=y
 # BR2_BINUTILS_VERSION_2_29_X is not set
 # BR2_BINUTILS_VERSION_2_30_X is not set
@@ -422,7 +430,7 @@ BR2_LINUX_KERNEL_LATEST_VERSION=y
 # BR2_LINUX_KERNEL_CUSTOM_GIT is not set
 # BR2_LINUX_KERNEL_CUSTOM_HG is not set
 # BR2_LINUX_KERNEL_CUSTOM_SVN is not set
-BR2_LINUX_KERNEL_VERSION="4.15.7"
+BR2_LINUX_KERNEL_VERSION="4.15.16"
 BR2_LINUX_KERNEL_PATCH=""
 BR2_LINUX_KERNEL_USE_DEFCONFIG=y
 # BR2_LINUX_KERNEL_USE_ARCH_DEFAULT_CONFIG is not set
@@ -443,9 +451,10 @@ BR2_LINUX_KERNEL_GZIP=y
 BR2_LINUX_KERNEL_IMAGE_TARGET_NAME="xipImage"
 BR2_LINUX_KERNEL_IMAGE_NAME=""
 BR2_LINUX_KERNEL_DTS_SUPPORT=y
-# BR2_LINUX_KERNEL_USE_INTREE_DTS is not set
-BR2_LINUX_KERNEL_USE_CUSTOM_DTS=y
+BR2_LINUX_KERNEL_INTREE_DTS_NAME=""
 BR2_LINUX_KERNEL_CUSTOM_DTS_PATH="../configs/stm32f429-disc1.dts"
+# BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL is not set
+# BR2_LINUX_KERNEL_NEEDS_HOST_LIBELF is not set
 
 #
 # Linux Kernel Extensions
@@ -534,6 +543,7 @@ BR2_PACKAGE_PULSEAUDIO_HAS_ATOMIC=y
 #
 # Compressors and decompressors
 #
+# BR2_PACKAGE_BROTLI is not set
 # BR2_PACKAGE_BZIP2 is not set
 # BR2_PACKAGE_LZ4 is not set
 
@@ -576,6 +586,7 @@ BR2_PACKAGE_GOOGLE_BREAKPAD_ARCH_SUPPORTS=y
 # BR2_PACKAGE_KEXEC is not set
 # BR2_PACKAGE_KTAP is not set
 BR2_PACKAGE_LTP_TESTSUITE_ARCH_SUPPORTS=y
+BR2_PACKAGE_LTRACE_ARCH_SUPPORTS=y
 
 #
 # ltrace needs a uClibc or glibc toolchain w/ wchar, dynamic library
@@ -666,10 +677,6 @@ BR2_PACKAGE_CMAKE_ARCH_SUPPORTS=y
 # BR2_PACKAGE_GENROMFS is not set
 # BR2_PACKAGE_MMC_UTILS is not set
 # BR2_PACKAGE_MTD is not set
-
-#
-# nilfs-utils needs a toolchain w/ threads, NPTL
-#
 # BR2_PACKAGE_SP_OOPS_EXTRACT is not set
 # BR2_PACKAGE_SUNXI_TOOLS is not set
 
@@ -1013,6 +1020,7 @@ BR2_PACKAGE_GAUCHE_ARCH_SUPPORTS=y
 #
 # guile needs a uClibc or glibc toolchain w/ threads, wchar, dynamic library
 #
+BR2_PACKAGE_JAMVM_ARCH_SUPPORTS=y
 
 #
 # jamvm needs a toolchain w/ threads, dynamic library
@@ -1148,7 +1156,7 @@ BR2_PACKAGE_WEBRTC_AUDIO_PROCESSING_ARCH_SUPPORTS=y
 #
 
 #
-# libsquish needs a toolchain w/ C++, dynamic library
+# libsquish needs a toolchain w/ C++
 #
 
 #
@@ -1238,10 +1246,6 @@ BR2_PACKAGE_MONGODB_ARCH_SUPPORTS=y
 
 #
 # mongodb needs a glibc toolchain w/ wchar, threads, C++, gcc >= 4.8
-#
-
-#
-# postgresql needs a toolchain w/ dynamic library
 #
 # BR2_PACKAGE_SQLCIPHER is not set
 # BR2_PACKAGE_SQLITE is not set
@@ -1436,7 +1440,6 @@ BR2_PACKAGE_LIBAIO_ARCH_SUPPORTS=y
 #
 # BR2_PACKAGE_LIBSERIALPORT is not set
 # BR2_PACKAGE_LIBSOC is not set
-# BR2_PACKAGE_LIBSS7 is not set
 # BR2_PACKAGE_LIBUSB is not set
 # BR2_PACKAGE_LIBUSBGX is not set
 
@@ -2165,7 +2168,10 @@ BR2_PACKAGE_IFUPDOWN_SCRIPTS=y
 # BR2_PACKAGE_IPTABLES is not set
 # BR2_PACKAGE_IW is not set
 # BR2_PACKAGE_LFT is not set
-# BR2_PACKAGE_LINUXPTP is not set
+
+#
+# linuxptp needs a toolchain w/ NPTL
+#
 
 #
 # lrzsz needs a toolchain w/ dynamic library
@@ -2515,10 +2521,7 @@ BR2_PACKAGE_HOST_GOOGLE_BREAKPAD_ARCH_SUPPORTS=y
 # BR2_PACKAGE_HOST_JSMIN is not set
 # BR2_PACKAGE_HOST_LPC3250LOADER is not set
 # BR2_PACKAGE_HOST_LTTNG_BABELTRACE is not set
-
-#
-# mfgtools needs host gcc >= 4.8
-#
+# BR2_PACKAGE_HOST_MFGTOOLS is not set
 # BR2_PACKAGE_HOST_MKPASSWD is not set
 # BR2_PACKAGE_HOST_MTD is not set
 # BR2_PACKAGE_HOST_MTOOLS is not set
@@ -2533,6 +2536,9 @@ BR2_PACKAGE_HOST_PATCHELF=y
 # BR2_PACKAGE_HOST_PWGEN is not set
 # BR2_PACKAGE_HOST_PYTHON_LXML is not set
 # BR2_PACKAGE_HOST_PYTHON_SIX is not set
+BR2_PACKAGE_HOST_QEMU_ARCH_SUPPORTS=y
+BR2_PACKAGE_HOST_QEMU_SYSTEM_ARCH_SUPPORTS=y
+BR2_PACKAGE_HOST_QEMU_USER_ARCH_SUPPORTS=y
 # BR2_PACKAGE_HOST_QEMU is not set
 # BR2_PACKAGE_HOST_RASPBERRYPI_USBBOOT is not set
 # BR2_PACKAGE_HOST_RAUC is not set
@@ -2557,6 +2563,7 @@ BR2_PACKAGE_HOST_TI_CGT_PRU_ARCH_SUPPORTS=y
 #
 # Legacy options removed in 2018.02
 #
+# BR2_PACKAGE_TRANSMISSION_REMOTE is not set
 # BR2_KERNEL_HEADERS_3_4 is not set
 # BR2_KERNEL_HEADERS_3_10 is not set
 # BR2_KERNEL_HEADERS_3_12 is not set
